@@ -1,0 +1,218 @@
+[
+    {
+        "id": "8cd4660c1e77249f",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e5d121112d5ad7e8",
+        "type": "OpcUa-Item",
+        "z": "8cd4660c1e77249f",
+        "item": "ns=5;s=Arp.Plc.Eclr/IOT_Stop;datatype=Boolean",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "IoT_Stop",
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "661aeef57b23bed8"
+            ]
+        ]
+    },
+    {
+        "id": "18d8475557f33296",
+        "type": "OpcUa-Item",
+        "z": "8cd4660c1e77249f",
+        "item": "ns=5;s=Arp.Plc.Eclr/IOT_Start;datatype=Boolean",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "IoT_Start",
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "661aeef57b23bed8"
+            ]
+        ]
+    },
+    {
+        "id": "661aeef57b23bed8",
+        "type": "OpcUa-Client",
+        "z": "8cd4660c1e77249f",
+        "endpoint": "c12ccd5df5093d87",
+        "action": "write",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "",
+        "x": 700,
+        "y": 220,
+        "wires": [
+            [
+                "03aca596662e3f74"
+            ]
+        ]
+    },
+    {
+        "id": "03aca596662e3f74",
+        "type": "debug",
+        "z": "8cd4660c1e77249f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "51664737d469e949",
+        "type": "debug",
+        "z": "8cd4660c1e77249f",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "ec8b4137bdad9a4c",
+        "type": "inject",
+        "z": "8cd4660c1e77249f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 230,
+        "y": 80,
+        "wires": [
+            [
+                "18d8475557f33296"
+            ]
+        ]
+    },
+    {
+        "id": "96730df160204c62",
+        "type": "inject",
+        "z": "8cd4660c1e77249f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 230,
+        "y": 220,
+        "wires": [
+            [
+                "e5d121112d5ad7e8"
+            ]
+        ]
+    },
+    {
+        "id": "56191fb1e32c1d83",
+        "type": "mqtt in",
+        "z": "8cd4660c1e77249f",
+        "name": "",
+        "topic": "control",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d0ccfd26c89813e2",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 340,
+        "wires": [
+            [
+                "e5d121112d5ad7e8",
+                "51664737d469e949"
+            ]
+        ]
+    },
+    {
+        "id": "c12ccd5df5093d87",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://192.168.178.178:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "d0ccfd26c89813e2",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
